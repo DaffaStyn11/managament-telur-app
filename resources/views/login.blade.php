@@ -1,24 +1,6 @@
-<!DOCTYPE html>
-<html lang="id">
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    {{-- Google Fonts --}}
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
-
-    <title>Masuk - Sistem Manajemen Telur Digital</title>
-
-    @vite('resources/css/app.css')
-
-    <script src="//unpkg.com/alpinejs" defer></script>
-</head>
-
-<body class="bg-[var(--pastel-green)] flex items-center justify-center min-h-screen p-4">
-
+@extends('layouts.app')
+@section('bodyClass', 'flex items-center justify-center min-h-screen p-4')
+@section('content')
     <div class="w-full max-w-md bg-white/70 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/40 p-8">
 
         {{-- Logo --}}
@@ -147,7 +129,6 @@
             </a>
         </p>
     </div>
+@endsection
 
-</body>
 
-</html>
