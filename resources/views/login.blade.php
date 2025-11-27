@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    {{-- Google Fonts --}}
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
+
+    <title>Masuk - Sistem Manajemen Telur Digital</title>
+
+    @vite('resources/css/app.css')
+
+    <script src="//unpkg.com/alpinejs" defer></script>
+</head>
+
+<body class="bg-[var(--pastel-green)] flex items-center justify-center min-h-screen p-4">
+
+    <div class="w-full max-w-md bg-white/70 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/40 p-8">
+
+        {{-- Logo --}}
+        <div class="text-center mb-8">
+
+            <div class="inline-flex items-center justify-center h-28 w-28 rounded-full bg-white shadow-xl border border-gray-100">
+
+                {{-- SVG TELUR MATA SAPI (Sunny Side Up) --}}
+                <svg width="90" height="90" viewBox="0 0 120 120">
+                    <!-- Putih Telur (asymmetric organic shape) -->
+                    <path d="
+                        M60 20
+                        C90 18, 110 40, 105 65
+                        C100 90, 70 105, 45 100
+                        C20 95, 10 70, 22 50
+                        C35 28, 45 22, 60 20Z"
+                        fill="#FFFAF0"
+                        stroke="#F3EAD8"
+                        stroke-width="3"
+                        class="drop-shadow-md"
+                    />
+
+                    <!-- Kuning Telur -->
+                    <circle cx="65" cy="63" r="22" fill="#FBBF24"/>
+
+                    <!-- Inner Shadow -->
+                    <circle cx="68" cy="66" r="16" fill="#F59E0B" opacity="0.7"/>
+
+                    <!-- Highlight -->
+                    <ellipse cx="58" cy="55" rx="10" ry="6" fill="white" opacity="0.45"/>
+                </svg>
+
+            </div>
+
+            <h1 class="mt-6 text-3xl font-extrabold text-[var(--dark-green-text)] tracking-tight">
+                Selamat Datang
+            </h1>
+            <p class="text-gray-700 mt-1">
+                Masuk untuk mengelola peternakan Anda secara digital
+            </p>
+        </div>
+
+        {{-- Form --}}
+        <div class="bg-white rounded-2xl p-6 shadow-xl border border-gray-100">
+
+            <form method="POST" class="space-y-6">
+                @csrf
+
+                {{-- Username --}}
+                <div>
+                    <label class="text-sm font-medium text-gray-700">Nama Pengguna</label>
+                    <input
+                        type="text"
+                        name="username"
+                        placeholder="Masukkan nama pengguna Anda"
+                        class="w-full mt-1 rounded-lg bg-gray-100 border-gray-300 py-3 px-4 shadow-sm
+                               focus:border-[var(--primary-accent)] focus:ring-[var(--primary-accent)]
+                               transition-all"
+                    >
+                </div>
+
+                {{-- Password --}}
+                <div x-data="{ show:false }">
+                    <label class="text-sm font-medium text-gray-700">Kata Sandi</label>
+
+                    <div class="relative">
+
+                        <input
+                            :type="show ? 'text' : 'password'"
+                            name="password"
+                            placeholder="Masukkan kata sandi Anda"
+                            class="w-full mt-1 rounded-lg bg-gray-100 border-gray-300 py-3 px-4 pr-12 shadow-sm
+                                   focus:border-[var(--primary-accent)] focus:ring-[var(--primary-accent)]
+                                   transition-all"
+                        >
+
+                        {{-- Toggle Eye --}}
+                        <button type="button"
+                            @click="show = !show"
+                            class="absolute inset-y-0 right-3 flex items-center text-gray-600 hover:text-gray-900"
+                        >
+                            <svg x-show="!show" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+
+                            <svg x-show="show" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.543-7a9.97 9.97 0 012.186-3.46M6.228 6.228A9.969 9.969 0 0112 5c4.477 0 8.268 2.943
+                                    9.543 7a9.97 9.97 0 01-3.168 4.568M9.88 9.88a3 3 0 104.243 4.243" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 3l18 18" />
+                            </svg>
+                        </button>
+
+                    </div>
+                </div>
+
+                <div class="flex justify-end">
+                    <a href="/resetpassword" class="text-sm font-medium text-[var(--dark-green-text)] hover:underline">
+                        Lupa Kata Sandi?
+                    </a>
+                </div>
+
+                <button
+                    type="submit"
+                    class="w-full py-3 rounded-lg bg-[var(--primary-accent)] text-gray-900 font-semibold
+                           shadow-md hover:bg-[var(--primary-accent-hover)]
+                           transition focus:ring-2 focus:ring-[var(--primary-accent-hover)] focus:ring-offset-2"
+                >
+                    Masuk
+                </button>
+
+            </form>
+        </div>
+
+        {{-- Register --}}
+        <p class="mt-6 text-center text-sm text-[var(--gray-text)]">
+            Belum punya akun?
+            <a href="/register" class="font-semibold text-[var(--dark-green-text)] hover:underline">
+                Daftar akun
+            </a>
+        </p>
+    </div>
+
+</body>
+
+</html>
