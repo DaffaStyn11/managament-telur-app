@@ -15,13 +15,25 @@ Route::get('resetpassword', function () {
     return view('resetpassword');
 });
 
-Route::get('create-kandang', function () {
-    return view('managementtelur.createkandang', [
-        'title' => 'Tambah Kandang Baru'
-    ]);
-});
-
-
 Route::get('dashboard', function () {
     return view('dashboard');
+});
+
+Route::get('managemenkandang', function () {
+    return view('managemenkandang');
+});
+
+Route::get('managementelur', function () {
+    return view('managementelur');
+});
+
+Route::get('managemenpenjualan', function () {
+    return view('managemenpenjualan');
+});
+
+// Route::get('penjualan', function () {
+//     return view('penjualan');
+// });
+Route::get('managemenpengeluaran', function () {
+    return view('managemenpengeluaran');
 });

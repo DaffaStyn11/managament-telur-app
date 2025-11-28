@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Manajemen Telur</title>
+    <title>Dashboard</title>
 
     @vite('resources/css/app.css')
 
@@ -44,38 +44,44 @@
             <nav class="p-4 space-y-2">
 
                 <!-- ACTIVE MENU -->
-                <a href="#"
-                    class="flex items-center gap-3 px-4 py-2 rounded-lg bg-yellow-400 font-semibold text-gray-900">
+                <a href="/dashboard"
+                    class="flex items-center gap-3 px-2 py-2 rounded-lg bg-yellow-400 font-semibold text-gray-900">
                     <i data-feather="layout"></i>
                     Dashboard
                 </a>
 
-                <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-100 text-gray-700">
+                <a href="/managemenkandang"
+                    class="flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-gray-100 text-gray-700">
                     <i data-feather="home"></i>
                     Manajemen Kandang
                 </a>
 
-                <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-100 text-gray-700">
+                <a href="/managementelur"
+                    class="flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-gray-100 text-gray-700">
                     <i data-feather="package"></i>
                     Manajemen Telur
                 </a>
 
-                <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-100 text-gray-700">
+                <a href="/managemenpenjualan"
+                    class="flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-gray-100 text-gray-700">
                     <i data-feather="shopping-bag"></i>
-                    Penjualan
+                    Manajemen Penjualan
                 </a>
 
-                <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-100 text-gray-700">
-                    <i data-feather="shopping-bag"></i>
-                    Pengeluaran
+                <a href="/managemenpengeluaran"
+                    class="flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-gray-100 text-gray-700">
+                    <i data-feather="shopping-cart"></i>
+                    Manajemen Pengeluaran
                 </a>
 
-                <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-100 text-gray-700">
+                <a href="/pembukuan"
+                    class="flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-gray-100 text-gray-700">
                     <i data-feather="file-text"></i>
                     Pembukuan
                 </a>
 
-                <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-100 text-gray-700">
+                <a href="/pengaturan"
+                    class="flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-gray-100 text-gray-700">
                     <i data-feather="settings"></i>
                     Pengaturan
                 </a>
@@ -125,6 +131,8 @@
                 </div>
             </div>
 
+            <!-- TITLE -->
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Dashboard</h2>
 
             <!-- CARDS -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -185,6 +193,25 @@
 
                         <canvas id="chartSaldo" height="100"></canvas>
                     </div>
+
+                    <!-- PENJUALAN -->
+                    <div class="p-5 rounded-xl border bg-white shadow-sm hover:shadow-md transition">
+                        <p class="text-gray-500 text-sm mb-1">Grafik Penjualan</p>
+                        <h4 class="text-3xl font-bold text-gray-800 mb-1">Rp 7.500.000</h4>
+                        <p class="text-green-600 text-sm mb-3">Bulan ini +12%</p>
+
+                        <canvas id="chartPenjualan" height="100"></canvas>
+                    </div>
+
+                    <!-- PENGELUARAN -->
+                    <div class="p-5 rounded-xl border bg-white shadow-sm hover:shadow-md transition">
+                        <p class="text-gray-500 text-sm mb-1">Grafik Pengeluaran</p>
+                        <h4 class="text-3xl font-bold text-gray-800 mb-1">Rp 3.200.000</h4>
+                        <p class="text-red-600 text-sm mb-3">Bulan ini +8%</p>
+
+                        <canvas id="chartPengeluaran" height="100"></canvas>
+                    </div>
+
 
                 </div>
             </div>
@@ -269,6 +296,39 @@
                     label: 'Saldo',
                     data: [2000, 2500, 3000, 3500, 4000, 5000],
                     borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+        // Chart Penjualan
+        new Chart(document.getElementById('chartPenjualan'), {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
+                datasets: [{
+                    label: 'Penjualan',
+                    data: [4000, 4500, 5000, 5500, 7000, 7500],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+        // Chart Pengeluaran
+        new Chart(document.getElementById('chartPengeluaran'), {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
+                datasets: [{
+                    label: 'Pengeluaran',
+                    data: [1500, 1800, 1700, 2000, 2500, 3200],
+                    borderWidth: 2,
+                    tension: 0.3
                 }]
             },
             options: {
