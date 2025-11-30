@@ -147,7 +147,6 @@
                                     <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-700">Jumlah</th>
                                     <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-700">Harga Satuan</th>
                                     <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-700">Total</th>
-                                    <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-700">Status</th>
                                     <th class="px-6 py-4 text-center text-xs font-bold uppercase tracking-wider text-gray-700">Aksi</th>
                                 </tr>
                             </thead>
@@ -174,100 +173,12 @@
                                     <td class="px-6 py-4 text-sm text-gray-700">Rp 2.000</td>
                                     <td class="px-6 py-4 text-sm font-semibold text-gray-900">Rp 240.000</td>
                                     <td class="px-6 py-4">
-                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                            <span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></span>
-                                            Lunas
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4">
                                         <div class="flex items-center justify-center gap-2">
                                             <button class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition" title="Edit">
                                                 <i data-feather="edit-3" class="w-4 h-4"></i>
                                             </button>
-                                            <button class="p-2 text-green-600 hover:bg-green-50 rounded-lg transition" title="Print">
-                                                <i data-feather="printer" class="w-4 h-4"></i>
-                                            </button>
-                                            <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition" title="Hapus">
-                                                <i data-feather="trash-2" class="w-4 h-4"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr class="hover:bg-gray-50 transition">
-                                    <td class="px-6 py-4 text-sm text-gray-900 font-medium">2</td>
-                                    <td class="px-6 py-4 text-sm text-gray-700">27 Nov 2025</td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center gap-3">
-                                            <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                                                <i data-feather="user" class="w-5 h-5 text-purple-600"></i>
-                                            </div>
-                                            <div>
-                                                <p class="text-sm font-semibold text-gray-900">Warung Makan Bu Tini</p>
-                                                <p class="text-xs text-gray-500">Pelanggan Baru</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <span class="text-sm font-semibold text-gray-900">90</span>
-                                        <span class="text-xs text-gray-500 ml-1">butir</span>
-                                    </td>
-                                    <td class="px-6 py-4 text-sm text-gray-700">Rp 2.000</td>
-                                    <td class="px-6 py-4 text-sm font-semibold text-gray-900">Rp 180.000</td>
-                                    <td class="px-6 py-4">
-                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                            <span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></span>
-                                            Lunas
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center justify-center gap-2">
-                                            <button class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition" title="Edit">
-                                                <i data-feather="edit-3" class="w-4 h-4"></i>
-                                            </button>
-                                            <button class="p-2 text-green-600 hover:bg-green-50 rounded-lg transition" title="Print">
-                                                <i data-feather="printer" class="w-4 h-4"></i>
-                                            </button>
-                                            <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition" title="Hapus">
-                                                <i data-feather="trash-2" class="w-4 h-4"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr class="hover:bg-gray-50 transition">
-                                    <td class="px-6 py-4 text-sm text-gray-900 font-medium">3</td>
-                                    <td class="px-6 py-4 text-sm text-gray-700">26 Nov 2025</td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center gap-3">
-                                            <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
-                                                <i data-feather="user" class="w-5 h-5 text-orange-600"></i>
-                                            </div>
-                                            <div>
-                                                <p class="text-sm font-semibold text-gray-900">Pasar Sentral</p>
-                                                <p class="text-xs text-gray-500">Pelanggan Tetap</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <span class="text-sm font-semibold text-gray-900">110</span>
-                                        <span class="text-xs text-gray-500 ml-1">butir</span>
-                                    </td>
-                                    <td class="px-6 py-4 text-sm text-gray-700">Rp 2.000</td>
-                                    <td class="px-6 py-4 text-sm font-semibold text-gray-900">Rp 220.000</td>
-                                    <td class="px-6 py-4">
-                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                                            <span class="w-1.5 h-1.5 bg-yellow-500 rounded-full mr-1.5"></span>
-                                            Pending
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center justify-center gap-2">
-                                            <button class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition" title="Edit">
-                                                <i data-feather="edit-3" class="w-4 h-4"></i>
-                                            </button>
-                                            <button class="p-2 text-green-600 hover:bg-green-50 rounded-lg transition" title="Print">
-                                                <i data-feather="printer" class="w-4 h-4"></i>
+                                            <button class="p-2 text-green-600 hover:bg-green-50 rounded-lg transition" title="Detail">
+                                                <i data-feather="eye" class="w-4 h-4"></i>
                                             </button>
                                             <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition" title="Hapus">
                                                 <i data-feather="trash-2" class="w-4 h-4"></i>
@@ -303,40 +214,6 @@
                         </div>
                     </div>
 
-                </div>
-
-                <!-- GRAFIK PENJUALAN -->
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-                    <div class="mb-6">
-                        <h3 class="text-xl font-bold text-gray-900 mb-1">Grafik Penjualan</h3>
-                        <p class="text-sm text-gray-600">Tren penjualan 6 bulan terakhir</p>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                        <div class="p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-xl border border-green-200">
-                            <p class="text-green-700 text-sm font-medium mb-1">Total Penjualan</p>
-                            <p class="text-2xl font-bold text-green-900">Rp 7.500.000</p>
-                            <p class="text-xs text-green-600 mt-1 flex items-center gap-1">
-                                <span>↑ 12%</span> vs bulan lalu
-                            </p>
-                        </div>
-
-                        <div class="p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl border border-blue-200">
-                            <p class="text-blue-700 text-sm font-medium mb-1">Rata-rata Per Hari</p>
-                            <p class="text-2xl font-bold text-blue-900">Rp 250.000</p>
-                            <p class="text-xs text-blue-600 mt-1">30 hari terakhir</p>
-                        </div>
-
-                        <div class="p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl border border-purple-200">
-                            <p class="text-purple-700 text-sm font-medium mb-1">Jumlah Transaksi</p>
-                            <p class="text-2xl font-bold text-purple-900">145</p>
-                            <p class="text-xs text-purple-600 mt-1">bulan ini</p>
-                        </div>
-                    </div>
-
-                    <div class="h-80">
-                        <canvas id="chartPenjualan"></canvas>
-                    </div>
                 </div>
 
             </main>

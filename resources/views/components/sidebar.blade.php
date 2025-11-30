@@ -75,12 +75,6 @@
                     <span class="font-medium text-sm">Pembukuan</span>
                 </a>
 
-                <a href="/pengaturan"
-                    class="flex items-center gap-3 px-4 py-3 rounded-xl group
-   {{ request()->is('pengaturan') ? 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 shadow-md' : 'hover:bg-gray-50 text-gray-600 hover:text-gray-900' }}">
-                    <i data-feather="settings" class="w-5 h-5"></i>
-                    <span class="font-medium text-sm">Pengaturan</span>
-                </a>
 
 
             </nav>

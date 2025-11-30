@@ -144,10 +144,7 @@
                                         Tanggal</th>
                                     <th
                                         class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-700">
-                                        Kategori</th>
-                                    <th
-                                        class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-700">
-                                        Deskripsi</th>
+                                        Pembelian</th>
                                     <th
                                         class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-700">
                                         Jumlah</th>
@@ -168,16 +165,8 @@
                                     <td class="px-6 py-4 text-sm text-gray-900 font-medium">1</td>
                                     <td class="px-6 py-4 text-sm text-gray-700">27 Nov 2025</td>
                                     <td class="px-6 py-4">
-                                        <span
-                                            class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                            <i data-feather="activity" class="w-3 h-3 mr-1"></i>
-                                            Obat
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4">
                                         <div>
                                             <p class="text-sm font-semibold text-gray-900">Vitamin VitaStress</p>
-                                            <p class="text-xs text-gray-500">Suplemen ayam</p>
                                         </div>
                                     </td>
                                     <td class="px-6 py-4">
@@ -188,90 +177,18 @@
                                     <td class="px-6 py-4 text-sm font-semibold text-gray-900">Rp 50.000</td>
                                     <td class="px-6 py-4">
                                         <div class="flex items-center justify-center gap-2">
-                                            <button class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition"
-                                                title="Edit">
+                                            <button class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition" title="Edit">
                                                 <i data-feather="edit-3" class="w-4 h-4"></i>
                                             </button>
-                                            <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition"
-                                                title="Hapus">
+                                            <button class="p-2 text-green-600 hover:bg-green-50 rounded-lg transition" title="Detail">
+                                                <i data-feather="eye" class="w-4 h-4"></i>
+                                            </button>
+                                            <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition" title="Hapus">
                                                 <i data-feather="trash-2" class="w-4 h-4"></i>
                                             </button>
                                         </div>
                                     </td>
                                 </tr>
-
-                                <tr class="hover:bg-gray-50 transition">
-                                    <td class="px-6 py-4 text-sm text-gray-900 font-medium">2</td>
-                                    <td class="px-6 py-4 text-sm text-gray-700">27 Nov 2025</td>
-                                    <td class="px-6 py-4">
-                                        <span
-                                            class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                            <i data-feather="package" class="w-3 h-3 mr-1"></i>
-                                            Pakan
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <div>
-                                            <p class="text-sm font-semibold text-gray-900">Pakan Konsentrat CP-11</p>
-                                            <p class="text-xs text-gray-500">Pakan berkualitas tinggi</p>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <span class="text-sm font-semibold text-gray-900">50</span>
-                                        <span class="text-xs text-gray-500 ml-1">kg</span>
-                                    </td>
-                                    <td class="px-6 py-4 text-sm text-gray-700">Rp 9.500</td>
-                                    <td class="px-6 py-4 text-sm font-semibold text-gray-900">Rp 475.000</td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center justify-center gap-2">
-                                            <button class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition"
-                                                title="Edit">
-                                                <i data-feather="edit-3" class="w-4 h-4"></i>
-                                            </button>
-                                            <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition"
-                                                title="Hapus">
-                                                <i data-feather="trash-2" class="w-4 h-4"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr class="hover:bg-gray-50 transition">
-                                    <td class="px-6 py-4 text-sm text-gray-900 font-medium">3</td>
-                                    <td class="px-6 py-4 text-sm text-gray-700">27 Nov 2025</td>
-                                    <td class="px-6 py-4">
-                                        <span
-                                            class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
-                                            <i data-feather="feather" class="w-3 h-3 mr-1"></i>
-                                            Ayam
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <div>
-                                            <p class="text-sm font-semibold text-gray-900">Golden Red</p>
-                                            <p class="text-xs text-gray-500">Ayam petelur</p>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <span class="text-sm font-semibold text-gray-900">10</span>
-                                        <span class="text-xs text-gray-500 ml-1">ekor</span>
-                                    </td>
-                                    <td class="px-6 py-4 text-sm text-gray-700">Rp 95.000</td>
-                                    <td class="px-6 py-4 text-sm font-semibold text-gray-900">Rp 950.000</td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center justify-center gap-2">
-                                            <button class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition"
-                                                title="Edit">
-                                                <i data-feather="edit-3" class="w-4 h-4"></i>
-                                            </button>
-                                            <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition"
-                                                title="Hapus">
-                                                <i data-feather="trash-2" class="w-4 h-4"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-
                             </tbody>
                         </table>
                     </div>
@@ -303,55 +220,6 @@
                                 class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition text-sm font-medium">
                                 Selanjutnya
                             </button>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- GRAFIK SECTION -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-                    <!-- GRAFIK PENGELUARAN -->
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-                        <div class="mb-6">
-                            <h3 class="text-xl font-bold text-gray-900 mb-1">Grafik Pengeluaran</h3>
-                            <p class="text-sm text-gray-600">Trend pengeluaran 6 bulan terakhir</p>
-                        </div>
-
-                        <div class="mb-4">
-                            <div class="p-4 bg-gradient-to-br from-red-50 to-red-100 rounded-xl border border-red-200">
-                                <p class="text-red-700 text-sm font-medium mb-1">Total Pengeluaran</p>
-                                <p class="text-2xl font-bold text-red-900">Rp 8.850.000</p>
-                                <p class="text-xs text-red-600 mt-1 flex items-center gap-1">
-                                    <span>↑ 6%</span> vs 6 bulan lalu
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="h-64">
-                            <canvas id="chartPengeluaran"></canvas>
-                        </div>
-                    </div>
-
-                    <!-- GRAFIK PERBANDINGAN -->
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-                        <div class="mb-6">
-                            <h3 class="text-xl font-bold text-gray-900 mb-1">Pengeluaran vs Pendapatan</h3>
-                            <p class="text-sm text-gray-600">Perbandingan 5 bulan</p>
-                        </div>
-
-                        <div class="mb-4">
-                            <div class="p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl border border-blue-200">
-                                <p class="text-blue-700 text-sm font-medium mb-1">Profit Margin</p>
-                                <div class="flex items-baseline gap-2">
-                                    <p class="text-2xl font-bold text-blue-900">57%</p>
-                                    <span class="text-xs text-green-600">↑ 5% vs bulan lalu</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="h-64">
-                            <canvas id="chartComparation"></canvas>
                         </div>
                     </div>
 

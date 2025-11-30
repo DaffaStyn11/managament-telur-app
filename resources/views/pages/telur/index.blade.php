@@ -155,9 +155,6 @@
                                         class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-700">
                                         Kuantitas</th>
                                     <th
-                                        class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-700">
-                                        Pengemasan</th>
-                                    <th
                                         class="px-6 py-4 text-center text-xs font-bold uppercase tracking-wider text-gray-700">
                                         Aksi</th>
                                 </tr>
@@ -172,67 +169,14 @@
                                         <span class="text-xs text-gray-500 ml-1">butir</span>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <span
-                                            class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                            10 butir/pak
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4">
                                         <div class="flex items-center justify-center gap-2">
-                                            <button class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition">
+                                            <button class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition" title="Edit">
                                                 <i data-feather="edit-3" class="w-4 h-4"></i>
                                             </button>
-                                            <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition">
-                                                <i data-feather="trash-2" class="w-4 h-4"></i>
+                                            <button class="p-2 text-green-600 hover:bg-green-50 rounded-lg transition" title="Detail">
+                                                <i data-feather="eye" class="w-4 h-4"></i>
                                             </button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr class="hover:bg-gray-50 transition">
-                                    <td class="px-6 py-4 text-sm text-gray-900 font-medium">2</td>
-                                    <td class="px-6 py-4 text-sm text-gray-700">27 Nov 2025</td>
-                                    <td class="px-6 py-4">
-                                        <span class="text-sm font-semibold text-gray-900">5.000</span>
-                                        <span class="text-xs text-gray-500 ml-1">butir</span>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <span
-                                            class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                            10 butir/pak
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center justify-center gap-2">
-                                            <button class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition">
-                                                <i data-feather="edit-3" class="w-4 h-4"></i>
-                                            </button>
-                                            <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition">
-                                                <i data-feather="trash-2" class="w-4 h-4"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr class="hover:bg-gray-50 transition">
-                                    <td class="px-6 py-4 text-sm text-gray-900 font-medium">3</td>
-                                    <td class="px-6 py-4 text-sm text-gray-700">27 Nov 2025</td>
-                                    <td class="px-6 py-4">
-                                        <span class="text-sm font-semibold text-gray-900">1.000</span>
-                                        <span class="text-xs text-gray-500 ml-1">butir</span>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <span
-                                            class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                            6 butir/pak
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center justify-center gap-2">
-                                            <button class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition">
-                                                <i data-feather="edit-3" class="w-4 h-4"></i>
-                                            </button>
-                                            <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition">
+                                            <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition" title="Hapus">
                                                 <i data-feather="trash-2" class="w-4 h-4"></i>
                                             </button>
                                         </div>
