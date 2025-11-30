@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
     <div class="grid min-h-screen grid-cols-1 lg:grid-cols-2">

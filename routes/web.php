@@ -4,36 +4,37 @@ use Illuminate\Support\Facades\Route;
 use resources\views\managementelur\layout;
 
 Route::get('/', function () {
-    return view('login');
+    return view('auth/login');
 });
 
 Route::get('register', function () {
-    return view('register');
+    return view('auth/register');
 });
 
 Route::get('resetpassword', function () {
-    return view('resetpassword');
+    return view('auth/resetpassword');
 });
 
 Route::get('dashboard', function () {
-    return view('dashboard');
+    return view('pages/dashboard/index');
 });
 
 Route::get('managemenkandang', function () {
-    return view('managemenkandang');
+    return view('pages/kandang/index');
 });
 
 Route::get('managementelur', function () {
-    return view('managementelur');
+    return view('pages/telur/index');
 });
 
 Route::get('managemenpenjualan', function () {
-    return view('managemenpenjualan');
+    return view('pages/penjualan/index');
 });
 
-// Route::get('penjualan', function () {
-//     return view('penjualan');
-// });
 Route::get('managemenpengeluaran', function () {
-    return view('managemenpengeluaran');
+    return view('pages/pengeluaran/index');
+});
+
+Route::get('pembukuan', function () {
+    return view('pages/pembukuan/index');
 });
