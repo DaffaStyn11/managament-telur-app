@@ -30,6 +30,25 @@
                     <p class="text-gray-600">Kelola data produksi telur dari setiap kandang dengan mudah dan efisien.</p>
                 </div>
 
+                <!-- Flash Messages -->
+                @if (session('success'))
+                    <div class="mb-6 bg-green-50 border-l-4 border-green-500 p-4 rounded-lg">
+                        <div class="flex items-center">
+                            <i data-feather="check-circle" class="w-5 h-5 text-green-500 mr-3"></i>
+                            <p class="text-green-700 font-medium">{{ session('success') }}</p>
+                        </div>
+                    </div>
+                @endif
+
+                @if (session('error'))
+                    <div class="mb-6 bg-red-50 border-l-4 border-red-500 p-4 rounded-lg">
+                        <div class="flex items-center">
+                            <i data-feather="alert-circle" class="w-5 h-5 text-red-500 mr-3"></i>
+                            <p class="text-red-700 font-medium">{{ session('error') }}</p>
+                        </div>
+                    </div>
+                @endif
+
                 <!-- Toolbar -->
                 <div class="mb-6 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
 
@@ -72,56 +91,7 @@
                     </div>
                 </div>
 
-                <!-- CARD SUMMARY -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
 
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition">
-                        <div class="flex items-center justify-between mb-3">
-                            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                                <i data-feather="egg" class="w-6 h-6 text-blue-600"></i>
-                            </div>
-                        </div>
-                        <h3 class="text-gray-600 text-sm font-medium mb-1">Total Hari Ini</h3>
-                        <p class="text-3xl font-bold text-gray-900">380</p>
-                        <p class="text-xs text-green-600 mt-2 flex items-center gap-1">
-                            <span>↑ 12%</span> vs kemarin
-                        </p>
-                    </div>
-
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition">
-                        <div class="flex items-center justify-between mb-3">
-                            <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                                <i data-feather="bar-chart-2" class="w-6 h-6 text-purple-600"></i>
-                            </div>
-                        </div>
-                        <h3 class="text-gray-600 text-sm font-medium mb-1">Rata-rata Mingguan</h3>
-                        <p class="text-3xl font-bold text-gray-900">2.450</p>
-                        <p class="text-xs text-gray-500 mt-2">per minggu</p>
-                    </div>
-
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition">
-                        <div class="flex items-center justify-between mb-3">
-                            <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
-                                <i data-feather="calendar" class="w-6 h-6 text-orange-600"></i>
-                            </div>
-                        </div>
-                        <h3 class="text-gray-600 text-sm font-medium mb-1">Total Bulanan</h3>
-                        <p class="text-3xl font-bold text-gray-900">10.800</p>
-                        <p class="text-xs text-gray-500 mt-2">bulan ini</p>
-                    </div>
-
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition">
-                        <div class="flex items-center justify-between mb-3">
-                            <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                                <i data-feather="pie-chart" class="w-6 h-6 text-green-600"></i>
-                            </div>
-                        </div>
-                        <h3 class="text-gray-600 text-sm font-medium mb-1">Proyeksi Tahunan</h3>
-                        <p class="text-3xl font-bold text-gray-900">128.400</p>
-                        <p class="text-xs text-gray-500 mt-2">estimasi</p>
-                    </div>
-
-                </div>
 
                 <!-- TABLE TELUR -->
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-200">
@@ -133,11 +103,11 @@
                                 <p class="text-sm text-gray-600">Data produksi telur terbaru dari kandang</p>
                             </div>
 
-                            <a href="#"
+                            <button @click="$dispatch('open-create-modal')"
                                 class="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 rounded-xl shadow-md hover:shadow-lg font-semibold flex items-center justify-center gap-2 transition">
                                 <i data-feather="plus" class="w-5 h-5"></i>
                                 <span>Tambah Produksi</span>
-                            </a>
+                            </button>
                         </div>
                     </div>
 
@@ -161,71 +131,91 @@
                             </thead>
 
                             <tbody class="divide-y divide-gray-200">
-                                <tr class="hover:bg-gray-50 transition">
-                                    <td class="px-6 py-4 text-sm text-gray-900 font-medium">1</td>
-                                    <td class="px-6 py-4 text-sm text-gray-700">27 Nov 2025</td>
-                                    <td class="px-6 py-4">
-                                        <span class="text-sm font-semibold text-gray-900">1.000</span>
-                                        <span class="text-xs text-gray-500 ml-1">butir</span>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center justify-center gap-2">
-                                            <button class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition" title="Edit">
-                                                <i data-feather="edit-3" class="w-4 h-4"></i>
-                                            </button>
-                                            <button class="p-2 text-green-600 hover:bg-green-50 rounded-lg transition" title="Detail">
-                                                <i data-feather="eye" class="w-4 h-4"></i>
-                                            </button>
-                                            <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition" title="Hapus">
-                                                <i data-feather="trash-2" class="w-4 h-4"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-
+                                @forelse($telurs as $index => $telur)
+                                    <tr class="hover:bg-gray-50 transition">
+                                        <td class="px-6 py-4 text-sm text-gray-900 font-medium">
+                                            {{ $telurs->firstItem() + $index }}</td>
+                                        <td class="px-6 py-4 text-sm text-gray-700">{{ $telur->tanggal->format('d M Y') }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <span
+                                                class="text-sm font-semibold text-gray-900">{{ number_format($telur->kuantitas) }}</span>
+                                            <span class="text-xs text-gray-500 ml-1">butir</span>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center justify-center gap-2">
+                                                <button
+                                                    @click="$dispatch('open-edit-modal', { id: {{ $telur->id }}, tanggal: '{{ $telur->tanggal->format('Y-m-d') }}', kuantitas: {{ $telur->kuantitas }}, catatan: '{{ $telur->catatan }}' })"
+                                                    class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition"
+                                                    title="Edit">
+                                                    <i data-feather="edit-3" class="w-4 h-4"></i>
+                                                </button>
+                                                <form action="{{ route('telur.destroy', $telur->id) }}" method="POST"
+                                                    class="inline"
+                                                    onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition"
+                                                        title="Hapus">
+                                                        <i data-feather="trash-2" class="w-4 h-4"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="4" class="px-6 py-12 text-center">
+                                            <div class="flex flex-col items-center justify-center">
+                                                <i data-feather="inbox" class="w-16 h-16 text-gray-300 mb-4"></i>
+                                                <p class="text-gray-500 text-lg font-medium mb-2">Belum ada data produksi
+                                                </p>
+                                                <p class="text-gray-400 text-sm mb-4">Silakan tambahkan data produksi telur
+                                                </p>
+                                                <button @click="$dispatch('open-create-modal')"
+                                                    class="px-6 py-2 bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 rounded-lg font-semibold hover:shadow-md transition">
+                                                    Tambah Produksi
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
 
                     <!-- Pagination -->
-                    <div
-                        class="flex flex-col sm:flex-row items-center justify-between px-6 py-4 border-t border-gray-200 gap-4">
-                        <span class="text-sm text-gray-600">Menampilkan <span class="font-semibold">1-10</span> dari <span
-                                class="font-semibold">50</span> entri</span>
+                    @if ($telurs->hasPages())
+                        <div
+                            class="flex flex-col sm:flex-row items-center justify-between px-6 py-4 border-t border-gray-200 gap-4">
+                            <span class="text-sm text-gray-600">
+                                Menampilkan <span class="font-semibold">{{ $telurs->firstItem() }}</span> -
+                                <span class="font-semibold">{{ $telurs->lastItem() }}</span> dari
+                                <span class="font-semibold">{{ $telurs->total() }}</span> entri
+                            </span>
 
-                        <div class="flex items-center gap-2">
-                            <button
-                                class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed">
-                                Sebelumnya
-                            </button>
-                            <button
-                                class="px-4 py-2 bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 rounded-lg hover:shadow-md transition text-sm font-semibold">
-                                1
-                            </button>
-                            <button
-                                class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition text-sm font-medium">
-                                2
-                            </button>
-                            <button
-                                class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition text-sm font-medium">
-                                3
-                            </button>
-                            <button
-                                class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition text-sm font-medium">
-                                Selanjutnya
-                            </button>
+                            <div class="flex items-center gap-2">
+                                {{ $telurs->links() }}
+                            </div>
                         </div>
-                    </div>
+                    @endif
 
                 </div>
 
             </main>
 
-            @include("components.footer")
+            @include('components.footer')
 
         </div>
 
     </div>
+
+    <!-- CREATE MODAL -->
+    @include('pages.telur.create')
+
+    <!-- EDIT MODAL -->
+    @include('pages.telur.edit')
 
     <script>
         feather.replace();

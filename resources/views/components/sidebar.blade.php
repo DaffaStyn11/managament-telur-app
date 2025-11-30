@@ -40,16 +40,16 @@
                     <span class="font-medium text-sm">Dashboard</span>
                 </a>
 
-                <a href="/managemenkandang"
+                <a href="/kandang"
                     class="flex items-center gap-3 px-4 py-3 rounded-xl group
-   {{ request()->is('managemenkandang') ? 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 shadow-md' : 'hover:bg-gray-50 text-gray-600 hover:text-gray-900' }}">
+   {{ request()->is('kandang') ? 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 shadow-md' : 'hover:bg-gray-50 text-gray-600 hover:text-gray-900' }}">
                     <i data-feather="home" class="w-5 h-5"></i>
                     <span class="font-medium text-sm">Manajemen Kandang</span>
                 </a>
 
-                <a href="/managementelur"
+                <a href="/telur"
                     class="flex items-center gap-3 px-4 py-3 rounded-xl group
-   {{ request()->is('managementelur') ? 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 shadow-md' : 'hover:bg-gray-50 text-gray-600 hover:text-gray-900' }}">
+   {{ request()->is('telur') ? 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 shadow-md' : 'hover:bg-gray-50 text-gray-600 hover:text-gray-900' }}">
                     <i data-feather="package" class="w-5 h-5"></i>
                     <span class="font-medium text-sm">Manajemen Telur</span>
                 </a>

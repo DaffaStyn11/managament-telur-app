@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\KandangController;
+use App\Http\Controllers\TelurController;
 use resources\views\managementelur\layout;
 
 Route::get('/', function () {
@@ -19,13 +21,13 @@ Route::get('dashboard', function () {
     return view('pages/dashboard/index');
 });
 
-Route::get('managemenkandang', function () {
-    return view('pages/kandang/index');
-});
+// Kandang CRUD Routes
+Route::resource('kandang', KandangController::class);
+Route::get('kandang/export/excel', [KandangController::class, 'exportExcel'])->name('kandang.export.excel');
+Route::get('kandang/export/pdf', [KandangController::class, 'exportPdf'])->name('kandang.export.pdf');
 
-Route::get('managementelur', function () {
-    return view('pages/telur/index');
-});
+// Telur CRUD Routes
+Route::resource('telur', TelurController::class);
 
 Route::get('managemenpenjualan', function () {
     return view('pages/penjualan/index');
