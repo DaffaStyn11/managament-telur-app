@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Data Kandang</title>
+    <title>Data Telur</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -69,22 +69,20 @@
         <thead>
             <tr>
                 <th style="width: 8%">No</th>
-                <th style="width: 25%">Nama Kandang</th>
-                <th style="width: 15%">Blok</th>
-                <th style="width: 17%">Jumlah Ayam</th>
-                <th style="width: 20%">Jenis Ayam</th>
+                <th style="width: 25%">Tanggal</th>
+                <th style="width: 15%">Kuantitas</th>
+                <th style="width: 17%">Catatan</th>
                 <th style="width: 15%">Tanggal</th>
             </tr>
         </thead>
         <tbody>
-            @forelse($kandangs as $index => $kandang)
+            @forelse($telurs as $index => $telur)
                 <tr>
                     <td style="text-align: center">{{ $index + 1 }}</td>
-                    <td>{{ $kandang->nama_kandang }}</td>
-                    <td>{{ $kandang->blok }}</td>
-                    <td style="text-align: center">{{ number_format($kandang->jumlah_ayam) }}</td>
-                    <td>{{ $kandang->jenis_ayam }}</td>
-                    <td>{{ $kandang->created_at->format('d-m-Y') }}</td>
+                    <td>{{ $telur->tanggal }}</td>
+                    <td style="text-align: center">{{ number_format($telur->kuantitas) }}</td>
+                    <td>{{ $telur->catatan }}</td>
+                    <td>{{ $telur->created_at->format('d-m-Y') }}</td>
                 </tr>
             @empty
                 <tr>
@@ -95,7 +93,7 @@
     </table>
 
     <div class="footer">
-        <p>Total Data Kandang: {{ $kandangs->count() }}</p>
+        <p>Total Data Telur: {{ $telurs->count() }}</p>
         <p>Dicetak pada: {{ date('d F Y H:i') }}</p>
     </div>
 </body>

@@ -51,16 +51,23 @@
                 <div class="mb-6 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
 
                     <!-- Search -->
-                    <div class="relative w-full lg:max-w-md">
+                    <form method="GET" action="{{ route('kandang.index') }}" class="relative w-full lg:max-w-md">
                         <span
                             class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl">
                             search
                         </span>
-                        <input type="text"
-                            class="w-full h-12 pl-12 pr-4 rounded-xl border border-gray-300 bg-white
-                           focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition text-sm"
-                            placeholder="Cari nama kandang atau jenis ayam...">
-                    </div>
+                        <input type="text" name="search" value="{{ request('search') }}"
+                            class="w-full h-12 pl-12 pr-20 rounded-xl border border-gray-300 bg-white
+                                      focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition text-sm"
+                            placeholder="Cari nama kandang, blok, atau jenis ayam...">
+                        @if (request('search'))
+                            <a href="{{ route('kandang.index') }}"
+                                class="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-gray-400 hover:text-gray-600 transition"
+                                title="Clear search">
+                                <i data-feather="x" class="w-4 h-4"></i>
+                            </a>
+                        @endif
+                    </form>
 
                     <!-- Action Buttons -->
                     <div class="flex items-center gap-3 flex-wrap w-full lg:w-auto">
@@ -184,7 +191,8 @@
                                         <td colspan="5" class="px-6 py-12 text-center">
                                             <div class="flex flex-col items-center justify-center">
                                                 <i data-feather="inbox" class="w-16 h-16 text-gray-300 mb-4"></i>
-                                                <p class="text-gray-500 text-lg font-medium mb-2">Belum ada data kandang</p>
+                                                <p class="text-gray-500 text-lg font-medium mb-2">Belum ada data kandang
+                                                </p>
                                                 <p class="text-gray-400 text-sm mb-4">Silakan tambahkan kandang baru untuk
                                                     memulai</p>
                                                 <button @click="$dispatch('open-create-modal')"

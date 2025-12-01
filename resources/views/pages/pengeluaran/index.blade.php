@@ -83,9 +83,6 @@
                         </div>
                         <h3 class="text-gray-600 text-sm font-medium mb-1">Pengeluaran Hari Ini</h3>
                         <p class="text-3xl font-bold text-gray-900">Rp 750.000</p>
-                        <p class="text-xs text-red-600 mt-2 flex items-center gap-1">
-                            <span>↑ 5%</span> vs kemarin
-                        </p>
                     </div>
 
                     <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition">
@@ -107,9 +104,6 @@
                         </div>
                         <h3 class="text-gray-600 text-sm font-medium mb-1">Pengeluaran Bulanan</h3>
                         <p class="text-3xl font-bold text-gray-900">Rp 18.000.000</p>
-                        <p class="text-xs text-orange-600 mt-2 flex items-center gap-1">
-                            <span>↑ 8%</span> bulan ini
-                        </p>
                     </div>
 
                 </div>
@@ -177,13 +171,12 @@
                                     <td class="px-6 py-4 text-sm font-semibold text-gray-900">Rp 50.000</td>
                                     <td class="px-6 py-4">
                                         <div class="flex items-center justify-center gap-2">
-                                            <button class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition" title="Edit">
+                                            <button class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition"
+                                                title="Edit">
                                                 <i data-feather="edit-3" class="w-4 h-4"></i>
                                             </button>
-                                            <button class="p-2 text-green-600 hover:bg-green-50 rounded-lg transition" title="Detail">
-                                                <i data-feather="eye" class="w-4 h-4"></i>
-                                            </button>
-                                            <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition" title="Hapus">
+                                            <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition"
+                                                title="Hapus">
                                                 <i data-feather="trash-2" class="w-4 h-4"></i>
                                             </button>
                                         </div>

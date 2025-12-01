@@ -28,6 +28,8 @@ Route::get('kandang/export/pdf', [KandangController::class, 'exportPdf'])->name(
 
 // Telur CRUD Routes
 Route::resource('telur', TelurController::class);
+Route::get('telur/export/excel', [TelurController::class, 'exportExcel'])->name('telur.export.excel');
+Route::get('telur/export/pdf', [TelurController::class, 'exportPdf'])->name('telur.export.pdf');
 
 Route::get('managemenpenjualan', function () {
     return view('pages/penjualan/index');

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Telur;
+use App\Exports\TelurExport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class TelurController extends Controller
 {
@@ -13,7 +16,18 @@ class TelurController extends Controller
     public function index()
     {
         $telurs = Telur::latest('tanggal')->paginate(10);
-        
+        $query = Telur::query();
+
+        // Search functionality
+        if (Request()->has('search') && Request()->search != '') {
+            $search = Request()->search;
+            $query->where(function($q) use ($search) {
+                $q->where('tanggal', 'like', '%' . $search . '%')
+                  ->orWhere('kuantitas', 'like', '%' . $search . '%');
+            });
+        }
+
+        $telurs = $query->latest()->paginate(10)->withQueryString();
 
         return view('pages.telur.index', compact('telurs'));
     }
@@ -113,5 +127,23 @@ class TelurController extends Controller
             return redirect()->back()
                 ->with('error', 'Gagal menghapus data: ' . $e->getMessage());
         }
+    }
+
+        /**
+     * Export telur data to Excel
+     */
+    public function exportExcel()
+    {
+        return Excel::download(new TelurExport, 'data-telur-' . date('Y-m-d') . '.xlsx');
+    }
+
+    /**
+     * Export telur data to PDF
+     */
+    public function exportPdf()
+    {
+        $telurs = Telur::all();
+        $pdf = Pdf::loadView('pages.telur.pdf', compact('telurs'));
+        return $pdf->download('data-telur-' . date('Y-m-d') . '.pdf');
     }
 }

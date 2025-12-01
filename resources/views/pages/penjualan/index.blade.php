@@ -1,17 +1,11 @@
 @extends('layouts.app')
 @section('content')
-
     <!-- Overlay for mobile -->
-    <div x-show="sidebarOpen && isMobile()"
-         x-cloak
-         @click="sidebarOpen = false"
-         class="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
-         x-transition:enter="transition ease-out duration-200"
-         x-transition:enter-start="opacity-0"
-         x-transition:enter-end="opacity-100"
-         x-transition:leave="transition ease-in duration-150"
-         x-transition:leave-start="opacity-100"
-         x-transition:leave-end="opacity-0">
+    <div x-show="sidebarOpen && isMobile()" x-cloak @click="sidebarOpen = false"
+        class="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden" x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0">
     </div>
 
     <!-- MAIN LAYOUT -->
@@ -22,7 +16,7 @@
 
         <!-- MAIN CONTENT -->
         <div class="flex-1 flex flex-col min-h-screen w-full transition-all duration-300 ease-in-out"
-             :style="!isMobile() && sidebarOpen ? 'margin-left: 288px' : 'margin-left: 0'">
+            :style="!isMobile() && sidebarOpen ? 'margin-left: 288px' : 'margin-left: 0'">
 
             <!-- HEADER -->
             @include('components.header')
@@ -41,7 +35,8 @@
 
                     <!-- Search -->
                     <div class="relative w-full lg:max-w-md">
-                        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl">
+                        <span
+                            class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl">
                             search
                         </span>
                         <input type="text"
@@ -88,9 +83,6 @@
                         </div>
                         <h3 class="text-gray-600 text-sm font-medium mb-1">Penjualan Hari Ini</h3>
                         <p class="text-3xl font-bold text-gray-900">Rp 2.500.000</p>
-                        <p class="text-xs text-green-600 mt-2 flex items-center gap-1">
-                            <span>↑ 18%</span> vs kemarin
-                        </p>
                     </div>
 
                     <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition">
@@ -112,9 +104,6 @@
                         </div>
                         <h3 class="text-gray-600 text-sm font-medium mb-1">Total Bulanan</h3>
                         <p class="text-3xl font-bold text-gray-900">Rp 60.000.000</p>
-                        <p class="text-xs text-green-600 mt-2 flex items-center gap-1">
-                            <span>↑ 12%</span> bulan ini
-                        </p>
                     </div>
 
                 </div>
@@ -141,13 +130,27 @@
                         <table class="w-full">
                             <thead>
                                 <tr class="bg-gray-50 border-b border-gray-200">
-                                    <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-700">No</th>
-                                    <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-700">Tanggal</th>
-                                    <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-700">Pelanggan</th>
-                                    <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-700">Jumlah</th>
-                                    <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-700">Harga Satuan</th>
-                                    <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-700">Total</th>
-                                    <th class="px-6 py-4 text-center text-xs font-bold uppercase tracking-wider text-gray-700">Aksi</th>
+                                    <th
+                                        class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-700">
+                                        No</th>
+                                    <th
+                                        class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-700">
+                                        Tanggal</th>
+                                    <th
+                                        class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-700">
+                                        Pelanggan</th>
+                                    <th
+                                        class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-700">
+                                        Jumlah</th>
+                                    <th
+                                        class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-700">
+                                        Harga Satuan</th>
+                                    <th
+                                        class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-700">
+                                        Total</th>
+                                    <th
+                                        class="px-6 py-4 text-center text-xs font-bold uppercase tracking-wider text-gray-700">
+                                        Aksi</th>
                                 </tr>
                             </thead>
 
@@ -174,13 +177,12 @@
                                     <td class="px-6 py-4 text-sm font-semibold text-gray-900">Rp 240.000</td>
                                     <td class="px-6 py-4">
                                         <div class="flex items-center justify-center gap-2">
-                                            <button class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition" title="Edit">
+                                            <button class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition"
+                                                title="Edit">
                                                 <i data-feather="edit-3" class="w-4 h-4"></i>
                                             </button>
-                                            <button class="p-2 text-green-600 hover:bg-green-50 rounded-lg transition" title="Detail">
-                                                <i data-feather="eye" class="w-4 h-4"></i>
-                                            </button>
-                                            <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition" title="Hapus">
+                                            <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition"
+                                                title="Hapus">
                                                 <i data-feather="trash-2" class="w-4 h-4"></i>
                                             </button>
                                         </div>
@@ -192,23 +194,30 @@
                     </div>
 
                     <!-- Pagination -->
-                    <div class="flex flex-col sm:flex-row items-center justify-between px-6 py-4 border-t border-gray-200 gap-4">
-                        <span class="text-sm text-gray-600">Menampilkan <span class="font-semibold">1-3</span> dari <span class="font-semibold">50</span> entri</span>
+                    <div
+                        class="flex flex-col sm:flex-row items-center justify-between px-6 py-4 border-t border-gray-200 gap-4">
+                        <span class="text-sm text-gray-600">Menampilkan <span class="font-semibold">1-3</span> dari <span
+                                class="font-semibold">50</span> entri</span>
 
                         <div class="flex items-center gap-2">
-                            <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed">
+                            <button
+                                class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed">
                                 Sebelumnya
                             </button>
-                            <button class="px-4 py-2 bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 rounded-lg hover:shadow-md transition text-sm font-semibold">
+                            <button
+                                class="px-4 py-2 bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 rounded-lg hover:shadow-md transition text-sm font-semibold">
                                 1
                             </button>
-                            <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition text-sm font-medium">
+                            <button
+                                class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition text-sm font-medium">
                                 2
                             </button>
-                            <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition text-sm font-medium">
+                            <button
+                                class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition text-sm font-medium">
                                 3
                             </button>
-                            <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition text-sm font-medium">
+                            <button
+                                class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition text-sm font-medium">
                                 Selanjutnya
                             </button>
                         </div>

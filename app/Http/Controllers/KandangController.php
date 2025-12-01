@@ -13,9 +13,23 @@ class KandangController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $kandangs = Kandang::latest()->paginate(10);
+        $query = Kandang::query();
+
+        // Search functionality
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('nama_kandang', 'like', '%' . $search . '%')
+                  ->orWhere('jenis_ayam', 'like', '%' . $search . '%')
+                  ->orWhere('blok', 'like', '%' . $search . '%')
+                  ->orWhere('jumlah_ayam', 'like', '%' . $search . '%');
+            });
+        }
+
+        $kandangs = $query->latest()->paginate(10)->withQueryString();
+        
         return view('pages.kandang.index', compact('kandangs'));
     }
 
