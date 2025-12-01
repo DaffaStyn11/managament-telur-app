@@ -1,5 +1,5 @@
-@extends("layouts.app")
-@section("content")
+@extends('layouts.app')
+@section('content')
     <!-- Overlay for mobile -->
     <div x-show="sidebarOpen && isMobile()" x-cloak @click="sidebarOpen = false"
         class="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden" x-transition:enter="transition ease-out duration-200"
@@ -12,424 +12,154 @@
     <div class="min-h-screen flex relative">
 
         <!-- SIDEBAR -->
-        @include("components.sidebar")
+        @include('components.sidebar')
 
         <!-- MAIN CONTENT -->
         <div class="flex-1 flex flex-col min-h-screen w-full transition-all duration-300 ease-in-out"
             :style="!isMobile() && sidebarOpen ? 'margin-left: 288px' : 'margin-left: 0'">
 
             <!-- HEADER -->
-            @include("components.header")
+            @include('components.header')
 
             <!-- CONTENT AREA -->
-            <main class="flex-1 px-4 sm:px-6 lg:px-8 py-6 lg:py-8 bg-gray-50">
+            <main class="flex-1 px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
 
                 <!-- TITLE -->
                 <div class="mb-8">
                     <h2 class="text-3xl font-bold text-gray-900 mb-2">Dashboard</h2>
-                    <p class="text-gray-600">Selamat datang kembali! Berikut ringkasan performa peternakan Anda hari ini.
+                    <p class="text-gray-600">Selamat datang di sistem manajemen telur. Berikut adalah ringkasan data Anda.
                     </p>
                 </div>
 
-                <!-- SUMMARY CARDS -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <!-- STATISTICS CARDS -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
 
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition">
-                        <div class="flex items-center justify-between mb-3">
-                            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                                <i data-feather="egg" class="w-6 h-6 text-blue-600"></i>
+                    <!-- Total Stock Card -->
+                    <div class="bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-2xl shadow-lg p-6 text-gray-900">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="p-3 bg-white bg-opacity-30 rounded-xl">
+                                <span class="material-symbols-outlined text-3xl">egg</span>
                             </div>
+                            <span class="text-sm font-semibold bg-white bg-opacity-30 px-3 py-1 rounded-full">Total
+                                Stok</span>
                         </div>
-                        <h3 class="text-gray-600 text-sm font-medium mb-1">Total Telur Hari Ini</h3>
-                        <p class="text-3xl font-bold text-gray-900">380</p>
-                        <p class="text-xs text-green-600 mt-2 flex items-center gap-1">
-                            <span>↑ 12%</span> vs kemarin
-                        </p>
+                        <h3 class="text-4xl font-bold mb-2">{{ number_format($totalStok) }}</h3>
+                        <p class="text-sm font-medium opacity-90">Butir Telur Tersedia</p>
                     </div>
 
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition">
-                        <div class="flex items-center justify-between mb-3">
-                            <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                                <i data-feather="shopping-cart" class="w-6 h-6 text-green-600"></i>
+                    <!-- Total Production Entries Card -->
+                    <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl shadow-lg p-6 text-white">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="p-3 bg-white bg-opacity-20 rounded-xl">
+                                <span class="material-symbols-outlined text-3xl">inventory_2</span>
                             </div>
+                            <span class="text-sm font-semibold bg-white bg-opacity-20 px-3 py-1 rounded-full">Data
+                                Produksi</span>
                         </div>
-                        <h3 class="text-gray-600 text-sm font-medium mb-1">Total Penjualan</h3>
-                        <p class="text-3xl font-bold text-gray-900">Rp 1,25 Jt</p>
-                        <p class="text-xs text-green-600 mt-2 flex items-center gap-1">
-                            <span>↑ 8%</span> dari target
-                        </p>
+                        <h3 class="text-4xl font-bold mb-2">{{ number_format($totalProduksi) }}</h3>
+                        <p class="text-sm font-medium opacity-90">Total Entri Produksi</p>
                     </div>
 
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition">
-                        <div class="flex items-center justify-between mb-3">
-                            <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                                <i data-feather="credit-card" class="w-6 h-6 text-purple-600"></i>
+                    <!-- Quick Action Card -->
+                    <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl shadow-lg p-6 text-white">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="p-3 bg-white bg-opacity-20 rounded-xl">
+                                <span class="material-symbols-outlined text-3xl">add_circle</span>
                             </div>
+                            <span class="text-sm font-semibold bg-white bg-opacity-20 px-3 py-1 rounded-full">Aksi
+                                Cepat</span>
                         </div>
-                        <h3 class="text-gray-600 text-sm font-medium mb-1">Saldo Bersih</h3>
-                        <p class="text-3xl font-bold text-gray-900">Rp 840 K</p>
-                        <p class="text-xs text-gray-500 mt-2">saldo tersedia</p>
+                        <h3 class="text-2xl font-bold mb-4">Tambah Data</h3>
+                        <a href="{{ route('telur.index') }}"
+                            class="inline-flex items-center gap-2 bg-white text-green-600 px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition">
+                            <span class="material-symbols-outlined text-xl">arrow_forward</span>
+                            <span>Kelola Telur</span>
+                        </a>
                     </div>
 
                 </div>
-                <!-- GRAFIK PRODUKSI -->
-                {{-- <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 mb-8">
-                    <div class="mb-6">
-                        <h3 class="text-xl font-bold text-gray-900 mb-1">Grafik Produksi Telur</h3>
-                        <p class="text-sm text-gray-600">7 hari terakhir</p>
-                    </div>
-                    <canvas id="eggChart" height="80"></canvas>
-                </div> --}}
 
-                <!-- PEMBUKUAN & LAPORAN -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 mb-8">
-                    <div class="mb-6">
-                        <h3 class="text-xl font-bold text-gray-900 mb-1">Pembukuan & Laporan</h3>
-                        <p class="text-sm text-gray-600">Ringkasan keuangan bulan ini</p>
-                    </div>
-
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-                        <!-- RINGKASAN KEUANGAN -->
-                        <div
-                            class="p-6 rounded-xl border border-gray-200 bg-gradient-to-br from-blue-50 to-white hover:shadow-md transition">
-                            <div class="flex items-center justify-between mb-4">
+                <!-- RECENT PRODUCTION -->
+                @if ($produksiTerbaru->count() > 0)
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200">
+                        <div class="p-6 border-b border-gray-200">
+                            <div class="flex items-center justify-between">
                                 <div>
-                                    <p class="text-gray-600 text-sm mb-1">Ringkasan Keuangan</p>
-                                    <h4 class="text-3xl font-bold text-gray-900">Rp 10 Jt</h4>
+                                    <h3 class="text-xl font-bold text-gray-900 mb-1">Produksi Terbaru</h3>
+                                    <p class="text-sm text-gray-600">5 data produksi telur terbaru</p>
                                 </div>
-                                <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                                    <i data-feather="trending-up" class="w-6 h-6 text-blue-600"></i>
-                                </div>
-                            </div>
-                            <p class="text-green-600 text-sm mb-4 flex items-center gap-1">
-                                <span>↑ 15%</span> bulan ini
-                            </p>
-                            <canvas id="chartRingkasan" height="100"></canvas>
-                        </div>
-
-                        <!-- SALDO -->
-                        <div
-                            class="p-6 rounded-xl border border-gray-200 bg-gradient-to-br from-green-50 to-white hover:shadow-md transition">
-                            <div class="flex items-center justify-between mb-4">
-                                <div>
-                                    <p class="text-gray-600 text-sm mb-1">Saldo</p>
-                                    <h4 class="text-3xl font-bold text-gray-900">Rp 5 Jt</h4>
-                                </div>
-                                <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                                    <i data-feather="dollar-sign" class="w-6 h-6 text-green-600"></i>
-                                </div>
-                            </div>
-                            <p class="text-green-600 text-sm mb-4 flex items-center gap-1">
-                                <span>↑ 10%</span> bulan ini
-                            </p>
-                            <canvas id="chartSaldo" height="100"></canvas>
-                        </div>
-
-                        <!-- PENJUALAN -->
-                        <div
-                            class="p-6 rounded-xl border border-gray-200 bg-gradient-to-br from-purple-50 to-white hover:shadow-md transition">
-                            <div class="flex items-center justify-between mb-4">
-                                <div>
-                                    <p class="text-gray-600 text-sm mb-1">Grafik Penjualan</p>
-                                    <h4 class="text-3xl font-bold text-gray-900">Rp 7,5 Jt</h4>
-                                </div>
-                                <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                                    <i data-feather="shopping-bag" class="w-6 h-6 text-purple-600"></i>
-                                </div>
-                            </div>
-                            <p class="text-green-600 text-sm mb-4 flex items-center gap-1">
-                                <span>↑ 12%</span> bulan ini
-                            </p>
-                            <canvas id="chartPenjualan" height="100"></canvas>
-                        </div>
-
-                        <!-- PENGELUARAN -->
-                        <div
-                            class="p-6 rounded-xl border border-gray-200 bg-gradient-to-br from-orange-50 to-white hover:shadow-md transition">
-                            <div class="flex items-center justify-between mb-4">
-                                <div>
-                                    <p class="text-gray-600 text-sm mb-1">Grafik Pengeluaran</p>
-                                    <h4 class="text-3xl font-bold text-gray-900">Rp 3,2 Jt</h4>
-                                </div>
-                                <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
-                                    <i data-feather="trending-down" class="w-6 h-6 text-orange-600"></i>
-                                </div>
-                            </div>
-                            <p class="text-red-600 text-sm mb-4 flex items-center gap-1">
-                                <span>↑ 8%</span> bulan ini
-                            </p>
-                            <canvas id="chartPengeluaran" height="100"></canvas>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- AKTIVITAS -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
-                    <div class="mb-6">
-                        <h3 class="text-xl font-bold text-gray-900 mb-1">Aktivitas Terbaru</h3>
-                        <p class="text-sm text-gray-600">Log aktivitas sistem hari ini</p>
-                    </div>
-
-                    <div class="space-y-4">
-                        <div
-                            class="flex items-start gap-4 p-4 rounded-xl border border-gray-200 hover:bg-gray-50 transition">
-                            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                <i data-feather="plus-circle" class="w-5 h-5 text-blue-600"></i>
-                            </div>
-                            <div class="flex-1">
-                                <p class="text-gray-900 font-medium text-sm">Menambah telur pada Kandang 1</p>
-                                <p class="text-xs text-gray-500 mt-1">10 menit lalu</p>
+                                <a href="{{ route('telur.index') }}"
+                                    class="text-yellow-600 hover:text-yellow-700 font-semibold text-sm flex items-center gap-1">
+                                    <span>Lihat Semua</span>
+                                    <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                                </a>
                             </div>
                         </div>
 
-                        <div
-                            class="flex items-start gap-4 p-4 rounded-xl border border-gray-200 hover:bg-gray-50 transition">
-                            <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                <i data-feather="shopping-cart" class="w-5 h-5 text-green-600"></i>
-                            </div>
-                            <div class="flex-1">
-                                <p class="text-gray-900 font-medium text-sm">Penjualan 60 butir</p>
-                                <p class="text-xs text-gray-500 mt-1">1 jam lalu</p>
-                            </div>
-                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead>
+                                    <tr class="bg-gray-50 border-b border-gray-200">
+                                        <th
+                                            class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-700">
+                                            No</th>
+                                        <th
+                                            class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-700">
+                                            Tanggal</th>
+                                        <th
+                                            class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-700">
+                                            Kuantitas</th>
+                                    </tr>
+                                </thead>
 
-                        <div
-                            class="flex items-start gap-4 p-4 rounded-xl border border-gray-200 hover:bg-gray-50 transition">
-                            <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                <i data-feather="package" class="w-5 h-5 text-orange-600"></i>
-                            </div>
-                            <div class="flex-1">
-                                <p class="text-gray-900 font-medium text-sm">Input pakan baru 20kg</p>
-                                <p class="text-xs text-gray-500 mt-1">2 jam lalu</p>
-                            </div>
+                                <tbody class="divide-y divide-gray-200">
+                                    @foreach ($produksiTerbaru as $index => $telur)
+                                        <tr class="hover:bg-gray-50 transition">
+                                            <td class="px-6 py-4 text-sm text-gray-900 font-medium">
+                                                {{ $index + 1 }}</td>
+                                            <td class="px-6 py-4 text-sm text-gray-700">
+                                                {{ $telur->tanggal->format('d M Y') }}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                <span
+                                                    class="text-sm font-semibold text-gray-900">{{ number_format($telur->kuantitas) }}</span>
+                                                <span class="text-xs text-gray-500 ml-1">butir</span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                </div>
+                @else
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-12">
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <span class="material-symbols-outlined text-6xl text-gray-300 mb-4">inbox</span>
+                            <p class="text-gray-500 text-lg font-medium mb-2">Belum ada data produksi</p>
+                            <p class="text-gray-400 text-sm mb-4">Silakan tambahkan data produksi telur untuk melihat
+                                statistik</p>
+                            <a href="{{ route('telur.index') }}"
+                                class="px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 rounded-xl font-semibold hover:shadow-md transition">
+                                Tambah Produksi
+                            </a>
+                        </div>
+                    </div>
+                @endif
 
             </main>
 
-            @include("components.footer")
+            @include('components.footer')
 
         </div>
 
     </div>
-    @include("components.scripts")
-        <script>
-        feather.replace();
 
-        // Update feather icons when Alpine re-renders
-        document.addEventListener('alpine:initialized', () => {
-            setTimeout(() => feather.replace(), 100);
-        });
-
-        // Chart Produksi Telur
-        const ctx = document.getElementById('eggChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'],
-                datasets: [{
-                    label: 'Produksi Telur',
-                    data: [320, 340, 300, 380, 360, 390, 410],
-                    borderWidth: 3,
-                    borderColor: '#FBBF24',
-                    backgroundColor: 'rgba(251, 191, 36, 0.2)',
-                    tension: 0.4,
-                    fill: true,
-                    pointBackgroundColor: '#FBBF24',
-                    pointBorderColor: '#fff',
-                    pointBorderWidth: 2,
-                    pointRadius: 4,
-                    pointHoverRadius: 6,
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        backgroundColor: '#1f2937',
-                        padding: 12,
-                        titleColor: '#fff',
-                        bodyColor: '#fff',
-                        borderColor: '#374151',
-                        borderWidth: 1,
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: false,
-                        grid: {
-                            color: '#f3f4f6'
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false
-                        }
-                    }
-                }
-            }
-        });
-
-        // Chart Ringkasan Keuangan
-        new Chart(document.getElementById('chartRingkasan'), {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
-                datasets: [{
-                    label: 'Pendapatan',
-                    data: [5000, 7000, 6000, 8000, 9500, 10000],
-                    borderWidth: 2,
-                    borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                    tension: 0.3,
-                    fill: true,
-                    pointBackgroundColor: '#3b82f6',
-                    pointBorderColor: '#fff',
-                    pointBorderWidth: 2,
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: '#f3f4f6'
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false
-                        }
-                    }
-                }
-            }
-        });
-
-        // Chart Saldo
-        new Chart(document.getElementById('chartSaldo'), {
-            type: 'bar',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
-                datasets: [{
-                    label: 'Saldo',
-                    data: [2000, 2500, 3000, 3500, 4000, 5000],
-                    backgroundColor: '#10b981',
-                    borderRadius: 8,
-                    borderWidth: 0,
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: '#f3f4f6'
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false
-                        }
-                    }
-                }
-            }
-        });
-
-        // Chart Penjualan
-        new Chart(document.getElementById('chartPenjualan'), {
-            type: 'bar',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
-                datasets: [{
-                    label: 'Penjualan',
-                    data: [4000, 4500, 5000, 5500, 7000, 7500],
-                    backgroundColor: '#8b5cf6',
-                    borderRadius: 8,
-                    borderWidth: 0,
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: '#f3f4f6'
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false
-                        }
-                    }
-                }
-            }
-        });
-
-        // Chart Pengeluaran
-        new Chart(document.getElementById('chartPengeluaran'), {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
-                datasets: [{
-                    label: 'Pengeluaran',
-                    data: [1500, 1800, 1700, 2000, 2500, 3200],
-                    borderWidth: 2,
-                    borderColor: '#f97316',
-                    backgroundColor: 'rgba(249, 115, 22, 0.1)',
-                    tension: 0.3,
-                    fill: true,
-                    pointBackgroundColor: '#f97316',
-                    pointBorderColor: '#fff',
-                    pointBorderWidth: 2,
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: '#f3f4f6'
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false
-                        }
-                    }
-                }
+    <script>
+        // Initialize Material Symbols if needed
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof feather !== 'undefined') {
+                feather.replace();
             }
         });
     </script>
-
 @endsection

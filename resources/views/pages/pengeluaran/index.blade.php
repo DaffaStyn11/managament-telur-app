@@ -30,6 +30,25 @@
                     <p class="text-gray-600">Kelola dan pantau semua pengeluaran operasional peternakan.</p>
                 </div>
 
+                <!-- Flash Messages -->
+                @if (session('success'))
+                    <div class="mb-6 bg-green-50 border-l-4 border-green-500 p-4 rounded-lg">
+                        <div class="flex items-center">
+                            <i data-feather="check-circle" class="w-5 h-5 text-green-500 mr-3"></i>
+                            <p class="text-green-700 font-medium">{{ session('success') }}</p>
+                        </div>
+                    </div>
+                @endif
+
+                @if (session('error'))
+                    <div class="mb-6 bg-red-50 border-l-4 border-red-500 p-4 rounded-lg">
+                        <div class="flex items-center">
+                            <i data-feather="alert-circle" class="w-5 h-5 text-red-500 mr-3"></i>
+                            <p class="text-red-700 font-medium">{{ session('error') }}</p>
+                        </div>
+                    </div>
+                @endif
+
                 <!-- Toolbar -->
                 <div class="mb-6 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
 
@@ -82,7 +101,7 @@
                             </div>
                         </div>
                         <h3 class="text-gray-600 text-sm font-medium mb-1">Pengeluaran Hari Ini</h3>
-                        <p class="text-3xl font-bold text-gray-900">Rp 750.000</p>
+                        <p class="text-3xl font-bold text-gray-900">Rp {{ number_format($stats['today'], 0, ',', '.') }}</p>
                     </div>
 
                     <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition">
@@ -92,8 +111,9 @@
                             </div>
                         </div>
                         <h3 class="text-gray-600 text-sm font-medium mb-1">Pengeluaran Mingguan</h3>
-                        <p class="text-3xl font-bold text-gray-900">Rp 4.500.000</p>
-                        <p class="text-xs text-gray-500 mt-2">per minggu</p>
+                        <p class="text-3xl font-bold text-gray-900">Rp {{ number_format($stats['weekly'], 0, ',', '.') }}
+                        </p>
+                        <p class="text-xs text-gray-500 mt-2">7 hari terakhir</p>
                     </div>
 
                     <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition">
@@ -103,7 +123,8 @@
                             </div>
                         </div>
                         <h3 class="text-gray-600 text-sm font-medium mb-1">Pengeluaran Bulanan</h3>
-                        <p class="text-3xl font-bold text-gray-900">Rp 18.000.000</p>
+                        <p class="text-3xl font-bold text-gray-900">Rp {{ number_format($stats['monthly'], 0, ',', '.') }}
+                        </p>
                     </div>
 
                 </div>
@@ -118,11 +139,11 @@
                                 <p class="text-sm text-gray-600">Riwayat semua pengeluaran operasional</p>
                             </div>
 
-                            <a href="#"
+                            <button @click="$dispatch('open-create-modal')"
                                 class="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 rounded-xl shadow-md hover:shadow-lg font-semibold flex items-center justify-center gap-2 transition">
                                 <i data-feather="plus" class="w-5 h-5"></i>
                                 <span>Tambah Pengeluaran</span>
-                            </a>
+                            </button>
                         </div>
                     </div>
 
@@ -155,66 +176,87 @@
                             </thead>
 
                             <tbody class="divide-y divide-gray-200">
-                                <tr class="hover:bg-gray-50 transition">
-                                    <td class="px-6 py-4 text-sm text-gray-900 font-medium">1</td>
-                                    <td class="px-6 py-4 text-sm text-gray-700">27 Nov 2025</td>
-                                    <td class="px-6 py-4">
-                                        <div>
-                                            <p class="text-sm font-semibold text-gray-900">Vitamin VitaStress</p>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <span class="text-sm font-semibold text-gray-900">2</span>
-                                        <span class="text-xs text-gray-500 ml-1">botol</span>
-                                    </td>
-                                    <td class="px-6 py-4 text-sm text-gray-700">Rp 25.000</td>
-                                    <td class="px-6 py-4 text-sm font-semibold text-gray-900">Rp 50.000</td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center justify-center gap-2">
-                                            <button class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition"
-                                                title="Edit">
-                                                <i data-feather="edit-3" class="w-4 h-4"></i>
-                                            </button>
-                                            <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition"
-                                                title="Hapus">
-                                                <i data-feather="trash-2" class="w-4 h-4"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                @forelse($pengeluarans as $index => $pengeluaran)
+                                    <tr class="hover:bg-gray-50 transition">
+                                        <td class="px-6 py-4 text-sm text-gray-900 font-medium">
+                                            {{ $pengeluarans->firstItem() + $index }}</td>
+                                        <td class="px-6 py-4 text-sm text-gray-700">
+                                            {{ $pengeluaran->tanggal->format('d M Y') }}</td>
+                                        <td class="px-6 py-4">
+                                            <div>
+                                                <p class="text-sm font-semibold text-gray-900">
+                                                    {{ $pengeluaran->nama_barang }}</p>
+                                                @if ($pengeluaran->kategori)
+                                                    <p class="text-xs text-gray-500">{{ $pengeluaran->kategori }}</p>
+                                                @endif
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <span
+                                                class="text-sm font-semibold text-gray-900">{{ number_format($pengeluaran->jumlah) }}</span>
+                                        </td>
+                                        <td class="px-6 py-4 text-sm text-gray-700">Rp
+                                            {{ number_format($pengeluaran->harga_satuan, 0, ',', '.') }}</td>
+                                        <td class="px-6 py-4 text-sm font-semibold text-gray-900">Rp
+                                            {{ number_format($pengeluaran->total, 0, ',', '.') }}</td>
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center justify-center gap-2">
+                                                <button
+                                                    @click="$dispatch('open-edit-modal', { id: {{ $pengeluaran->id }}, tanggal: '{{ $pengeluaran->tanggal->format('Y-m-d') }}', nama_barang: '{{ $pengeluaran->nama_barang }}', kategori: '{{ $pengeluaran->kategori }}', jumlah: {{ $pengeluaran->jumlah }}, harga_satuan: {{ $pengeluaran->harga_satuan }}, catatan: '{{ $pengeluaran->catatan }}' })"
+                                                    class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition"
+                                                    title="Edit">
+                                                    <i data-feather="edit-3" class="w-4 h-4"></i>
+                                                </button>
+                                                <form action="{{ route('pengeluaran.destroy', $pengeluaran->id) }}"
+                                                    method="POST" class="inline"
+                                                    onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition"
+                                                        title="Hapus">
+                                                        <i data-feather="trash-2" class="w-4 h-4"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="7" class="px-6 py-12 text-center">
+                                            <div class="flex flex-col items-center justify-center">
+                                                <i data-feather="inbox" class="w-16 h-16 text-gray-300 mb-4"></i>
+                                                <p class="text-gray-500 text-lg font-medium mb-2">Belum ada data
+                                                    pengeluaran</p>
+                                                <p class="text-gray-400 text-sm mb-4">Silakan tambahkan data pengeluaran
+                                                </p>
+                                                <button @click="$dispatch('open-create-modal')"
+                                                    class="px-6 py-2 bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 rounded-lg font-semibold hover:shadow-md transition">
+                                                    Tambah Pengeluaran
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
 
                     <!-- Pagination -->
-                    <div
-                        class="flex flex-col sm:flex-row items-center justify-between px-6 py-4 border-t border-gray-200 gap-4">
-                        <span class="text-sm text-gray-600">Menampilkan <span class="font-semibold">1-3</span> dari <span
-                                class="font-semibold">32</span> entri</span>
+                    @if ($pengeluarans->hasPages())
+                        <div
+                            class="flex flex-col sm:flex-row items-center justify-between px-6 py-4 border-t border-gray-200 gap-4">
+                            <span class="text-sm text-gray-600">
+                                Menampilkan <span class="font-semibold">{{ $pengeluarans->firstItem() }}</span> -
+                                <span class="font-semibold">{{ $pengeluarans->lastItem() }}</span> dari
+                                <span class="font-semibold">{{ $pengeluarans->total() }}</span> entri
+                            </span>
 
-                        <div class="flex items-center gap-2">
-                            <button
-                                class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed">
-                                Sebelumnya
-                            </button>
-                            <button
-                                class="px-4 py-2 bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 rounded-lg hover:shadow-md transition text-sm font-semibold">
-                                1
-                            </button>
-                            <button
-                                class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition text-sm font-medium">
-                                2
-                            </button>
-                            <button
-                                class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition text-sm font-medium">
-                                3
-                            </button>
-                            <button
-                                class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition text-sm font-medium">
-                                Selanjutnya
-                            </button>
+                            <div class="flex items-center gap-2">
+                                {{ $pengeluarans->links() }}
+                            </div>
                         </div>
-                    </div>
+                    @endif
 
                 </div>
 
@@ -226,6 +268,13 @@
         </div>
 
     </div>
+
+    <!-- CREATE MODAL -->
+    @include('pages.pengeluaran.create')
+
+    <!-- EDIT MODAL -->
+    @include('pages.pengeluaran.edit')
+
     @include('components.scripts')
     <script>
         feather.replace();

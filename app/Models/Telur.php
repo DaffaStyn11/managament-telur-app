@@ -45,4 +45,14 @@ class Telur extends Model
         $monthlyAvg = self::getMonthlyTotal();
         return $monthlyAvg * 12;
     }
+
+    /**
+     * Get current stock (total production - total sales)
+     */
+    public static function getCurrentStock()
+    {
+        $totalProduction = self::sum('kuantitas');
+        $totalSales = \App\Models\Penjualan::sum('jumlah');
+        return $totalProduction - $totalSales;
+    }
 }

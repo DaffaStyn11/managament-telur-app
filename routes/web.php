@@ -1,8 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KandangController;
 use App\Http\Controllers\TelurController;
+use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\PengeluaranController;
+use App\Http\Controllers\PembukuanController;
 use resources\views\managementelur\layout;
 
 Route::get('/', function () {
@@ -17,9 +21,7 @@ Route::get('resetpassword', function () {
     return view('auth/resetpassword');
 });
 
-Route::get('dashboard', function () {
-    return view('pages/dashboard/index');
-});
+Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 // Kandang CRUD Routes
 Route::resource('kandang', KandangController::class);
@@ -31,14 +33,11 @@ Route::resource('telur', TelurController::class);
 Route::get('telur/export/excel', [TelurController::class, 'exportExcel'])->name('telur.export.excel');
 Route::get('telur/export/pdf', [TelurController::class, 'exportPdf'])->name('telur.export.pdf');
 
-Route::get('managemenpenjualan', function () {
-    return view('pages/penjualan/index');
-});
+// Penjualan CRUD Routes
+Route::resource('penjualan', PenjualanController::class);
 
-Route::get('managemenpengeluaran', function () {
-    return view('pages/pengeluaran/index');
-});
+// Pengeluaran CRUD Routes
+Route::resource('pengeluaran', PengeluaranController::class);
 
-Route::get('pembukuan', function () {
-    return view('pages/pembukuan/index');
-});
+// Pembukuan Routes
+Route::get('pembukuan', [PembukuanController::class, 'index'])->name('pembukuan.index');

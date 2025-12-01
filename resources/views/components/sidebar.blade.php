@@ -54,16 +54,16 @@
                     <span class="font-medium text-sm">Manajemen Telur</span>
                 </a>
 
-                <a href="/managemenpenjualan"
+                <a href="{{ route('penjualan.index') }}"
                     class="flex items-center gap-3 px-4 py-3 rounded-xl group
-   {{ request()->is('managemenpenjualan') ? 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 shadow-md' : 'hover:bg-gray-50 text-gray-600 hover:text-gray-900' }}">
+   {{ request()->is('penjualan*') ? 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 shadow-md' : 'hover:bg-gray-50 text-gray-600 hover:text-gray-900' }}">
                     <i data-feather="shopping-bag" class="w-5 h-5"></i>
                     <span class="font-medium text-sm">Manajemen Penjualan</span>
                 </a>
 
-                <a href="/managemenpengeluaran"
+                <a href="{{ route('pengeluaran.index') }}"
                     class="flex items-center gap-3 px-4 py-3 rounded-xl group
-   {{ request()->is('managemenpengeluaran') ? 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 shadow-md' : 'hover:bg-gray-50 text-gray-600 hover:text-gray-900' }}">
+   {{ request()->is('pengeluaran*') ? 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 shadow-md' : 'hover:bg-gray-50 text-gray-600 hover:text-gray-900' }}">
                     <i data-feather="shopping-cart" class="w-5 h-5"></i>
                     <span class="font-medium text-sm">Manajemen Pengeluaran</span>
                 </a>
