@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Penjualan;
-use App\Models\Telur;
+use App\Exports\PenjualanExport;
 use Illuminate\Http\Request;
+use App\Models\Telur;
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PenjualanController extends Controller
 {
@@ -13,9 +16,23 @@ class PenjualanController extends Controller
      */
     public function index()
     {
-        $penjualans = Penjualan::latest('tanggal')->paginate(10);
-        
-        // Get statistics
+        $query = Penjualan::query();
+
+        // Search functionality
+        if (request('search')) {
+            $search = request('search');
+            $query->where(function($q) use ($search) {
+                $q->where('tanggal', 'like', '%' . $search . '%')
+                  ->orWhere('pelanggan', 'like', '%' . $search . '%')
+                  ->orWhere('jumlah', 'like', '%' . $search . '%')
+                  ->orWhere('harga_satuan', 'like', '%' . $search . '%')
+                  ->orWhere('total', 'like', '%' . $search . '%')
+                  ->orWhere('catatan', 'like', '%' . $search . '%');
+            });
+        }
+
+        $penjualans = $query->latest('tanggal')->paginate(10)->withQueryString();
+
         $stats = [
             'today' => Penjualan::getTodayTotal(),
             'weekly_avg' => Penjualan::getWeeklyAverage(),
@@ -136,5 +153,21 @@ class PenjualanController extends Controller
             return redirect()->back()
                 ->with('error', 'Gagal menghapus data: ' . $e->getMessage());
         }
+    }
+
+    public function exportPDF()
+    {
+        $penjualans = Penjualan::all();
+        
+        $pdf = PDF::loadView('pages.penjualan.pdf', compact('penjualans'));
+        
+        return $pdf->download('penjualan.pdf');
+    }
+
+    public function exportExcel()
+    {
+        $penjualans = Penjualan::all();
+        
+        return Excel::download(new Penjualan($penjualans), 'penjualan.xlsx');
     }
 }

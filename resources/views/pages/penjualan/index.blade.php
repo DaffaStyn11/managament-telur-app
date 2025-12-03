@@ -53,16 +53,23 @@
                 <div class="mb-6 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
 
                     <!-- Search -->
-                    <div class="relative w-full lg:max-w-md">
+                    <form method="GET" action="{{ route('penjualan.index') }}" class="relative w-full lg:max-w-md">
                         <span
                             class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl">
                             search
                         </span>
-                        <input type="text"
-                            class="w-full h-12 pl-12 pr-4 rounded-xl border border-gray-300 bg-white
-                           focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition text-sm"
-                            placeholder="Cari pelanggan atau tanggal penjualan...">
-                    </div>
+                        <input type="text" name="search" value="{{ request('search') }}"
+                            class="w-full h-12 pl-12 pr-20 rounded-xl border border-gray-300 bg-white
+                                      focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition text-sm"
+                            placeholder="Cari tanggal, kuantitas...">
+                        @if (request('search'))
+                            <a href="{{ route('penjualan.index') }}"
+                                class="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-gray-400 hover:text-gray-600 transition"
+                                title="Clear search">
+                                <i data-feather="x" class="w-4 h-4"></i>
+                            </a>
+                        @endif
+                    </form>
 
                     <!-- Action Buttons -->
                     <div class="flex items-center gap-3 flex-wrap w-full lg:w-auto">
@@ -74,19 +81,19 @@
                             <span class="hidden sm:inline">Filter Tanggal</span>
                         </button>
 
-                        <button
+                        <a href="{{ route('penjualan.export.excel') }}"
                             class="flex h-12 items-center gap-2 rounded-xl border border-gray-300 px-4 text-sm font-semibold
                            bg-white hover:bg-gray-50 transition shadow-sm flex-1 lg:flex-none justify-center">
                             <span class="material-symbols-outlined text-xl text-green-600">grid_on</span>
                             <span class="hidden sm:inline">Excel</span>
-                        </button>
+                        </a>
 
-                        <button
+                        <a href="{{ route('penjualan.export.pdf') }}"
                             class="flex h-12 items-center gap-2 rounded-xl border border-gray-300 px-4 text-sm font-semibold
                            bg-white hover:bg-gray-50 transition shadow-sm flex-1 lg:flex-none justify-center">
                             <span class="material-symbols-outlined text-xl text-red-600">picture_as_pdf</span>
                             <span class="hidden sm:inline">PDF</span>
-                        </button>
+                        </a>
 
                     </div>
                 </div>

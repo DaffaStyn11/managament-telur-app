@@ -123,4 +123,20 @@ class PengeluaranController extends Controller
                 ->with('error', 'Gagal menghapus data: ' . $e->getMessage());
         }
     }
+
+    public function exportPDF()
+    {
+        $pengeluarans = Pengeluaran::all();
+        
+        $pdf = PDF::loadView('pages.pengeluaran.pdf', compact('pengeluarans'));
+        
+        return $pdf->download('pengeluaran.pdf');
+    }
+
+    public function exportExcel()
+    {
+        $pengeluarans = Pengeluaran::all();
+        
+        return Excel::download(new PengeluaranCollection($pengeluarans), 'pengeluaran.xlsx');
+    }
 }
