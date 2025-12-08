@@ -34,40 +34,40 @@
                 <div class="mb-6 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
 
                     <!-- Search -->
-                    <div class="relative w-full lg:max-w-md">
+                    <form method="GET" action="{{ route('pembukuan.index') }}" class="relative w-full lg:max-w-md">
                         <span
                             class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl">
                             search
                         </span>
-                        <input type="text"
-                            class="w-full h-12 pl-12 pr-4 rounded-xl border border-gray-300 bg-white
-                           focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition text-sm"
-                            placeholder="Cari transaksi atau periode...">
-                    </div>
+                        <input type="text" name="search" value="{{ request('search') }}"
+                            class="w-full h-12 pl-12 pr-20 rounded-xl border border-gray-300 bg-white
+                                      focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition text-sm"
+                            placeholder="Cari periode bulan...">
+                        @if (request('search'))
+                            <a href="{{ route('pembukuan.index') }}"
+                                class="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-gray-400 hover:text-gray-600 transition"
+                                title="Clear search">
+                                <i data-feather="x" class="w-4 h-4"></i>
+                            </a>
+                        @endif
+                    </form>
 
                     <!-- Action Buttons -->
                     <div class="flex items-center gap-3 flex-wrap w-full lg:w-auto">
 
-                        <button
-                            class="flex h-12 items-center gap-2 rounded-xl border border-gray-300 px-4 text-sm font-semibold
-                           bg-white hover:bg-gray-50 transition shadow-sm flex-1 lg:flex-none justify-center">
-                            <span class="material-symbols-outlined text-xl text-gray-600">calendar_month</span>
-                            <span class="hidden sm:inline">Filter Tanggal</span>
-                        </button>
-
-                        <button
+                        <a href="{{ route('pembukuan.export.excel') }}"
                             class="flex h-12 items-center gap-2 rounded-xl border border-gray-300 px-4 text-sm font-semibold
                            bg-white hover:bg-gray-50 transition shadow-sm flex-1 lg:flex-none justify-center">
                             <span class="material-symbols-outlined text-xl text-green-600">grid_on</span>
                             <span class="hidden sm:inline">Excel</span>
-                        </button>
+                        </a>
 
-                        <button
+                        <a href="{{ route('pembukuan.export.pdf') }}"
                             class="flex h-12 items-center gap-2 rounded-xl border border-gray-300 px-4 text-sm font-semibold
                            bg-white hover:bg-gray-50 transition shadow-sm flex-1 lg:flex-none justify-center">
                             <span class="material-symbols-outlined text-xl text-red-600">picture_as_pdf</span>
                             <span class="hidden sm:inline">PDF</span>
-                        </button>
+                        </a>
 
                     </div>
                 </div>
@@ -208,35 +208,6 @@
                                 @endforelse
                             </tbody>
                         </table>
-                        <!-- Pagination -->
-                        <div
-                            class="flex flex-col sm:flex-row items-center justify-between px-6 py-4 border-t border-gray-200 gap-4">
-                            <span class="text-sm text-gray-600">Menampilkan <span class="font-semibold">1-3</span> dari
-                                <span class="font-semibold">32</span> entri</span>
-
-                            <div class="flex items-center gap-2">
-                                <button
-                                    class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed">
-                                    Sebelumnya
-                                </button>
-                                <button
-                                    class="px-4 py-2 bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 rounded-lg hover:shadow-md transition text-sm font-semibold">
-                                    1
-                                </button>
-                                <button
-                                    class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition text-sm font-medium">
-                                    2
-                                </button>
-                                <button
-                                    class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition text-sm font-medium">
-                                    3
-                                </button>
-                                <button
-                                    class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition text-sm font-medium">
-                                    Selanjutnya
-                                </button>
-                            </div>
-                        </div>
                     </div>
 
                 </div>

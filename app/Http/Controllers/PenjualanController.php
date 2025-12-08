@@ -168,6 +168,6 @@ class PenjualanController extends Controller
     {
         $penjualans = Penjualan::all();
         
-        return Excel::download(new Penjualan($penjualans), 'penjualan.xlsx');
+        return Excel::download(new PenjualanExport($penjualans), 'penjualan.xlsx');
     }
 }

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pengeluaran;
+use App\Exports\PengeluaranExport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PengeluaranController extends Controller
 {
@@ -12,12 +15,26 @@ class PengeluaranController extends Controller
      */
     public function index()
     {
-        $pengeluarans = Pengeluaran::latest('tanggal')->paginate(10);
-        
-        // Get statistics
+        $query = Pengeluaran::query();
+
+        // Search functionality
+        if (request('search')) {
+            $search = request('search');
+            $query->where(function($q) use ($search) {
+                $q->where('tanggal', 'like', '%' . $search . '%')
+                  ->orWhere('nama_barang', 'like', '%' . $search . '%')
+                  ->orWhere('jumlah', 'like', '%' . $search . '%')
+                  ->orWhere('harga_satuan', 'like', '%' . $search . '%')
+                  ->orWhere('total', 'like', '%' . $search . '%')
+                  ->orWhere('catatan', 'like', '%' . $search . '%');
+            });
+        }
+
+        $pengeluarans = $query->latest('tanggal')->paginate(10)->withQueryString();
+
         $stats = [
             'today' => Pengeluaran::getTodayTotal(),
-            'weekly' => Pengeluaran::getWeeklyTotal(),
+            'weekly_avg' => Pengeluaran::getWeeklyTotal(),
             'monthly' => Pengeluaran::getMonthlyTotal(),
         ];
 
@@ -137,6 +154,6 @@ class PengeluaranController extends Controller
     {
         $pengeluarans = Pengeluaran::all();
         
-        return Excel::download(new PengeluaranCollection($pengeluarans), 'pengeluaran.xlsx');
+        return Excel::download(new PengeluaranExport($pengeluarans), 'pengeluaran.xlsx');
     }
 }

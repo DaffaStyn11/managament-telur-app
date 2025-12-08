@@ -50,7 +50,11 @@ Route::middleware('auth')->group(function () {
 
     // Pengeluaran CRUD Routes
     Route::resource('pengeluaran', PengeluaranController::class);
+    Route::get('pengeluaran/export/excel', [PengeluaranController::class, 'exportExcel'])->name('pengeluaran.export.excel');
+    Route::get('pengeluaran/export/pdf', [PengeluaranController::class, 'exportPDF'])->name('pengeluaran.export.pdf');
 
     // Pembukuan Routes
     Route::get('pembukuan', [PembukuanController::class, 'index'])->name('pembukuan.index');
+    Route::get('pembukuan/export/excel', [PembukuanController::class, 'exportExcel'])->name('pembukuan.export.excel');
+    Route::get('pembukuan/export/pdf', [PembukuanController::class, 'exportPDF'])->name('pembukuan.export.pdf');
 });

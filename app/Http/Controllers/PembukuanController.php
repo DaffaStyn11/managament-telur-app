@@ -6,6 +6,11 @@ use App\Models\Penjualan;
 use App\Models\Pengeluaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Exports\PengeluaranExport;
+use App\Exports\PenjualanExport;
+use App\Exports\PembukuanExport;
 
 class PembukuanController extends Controller
 {
@@ -49,6 +54,14 @@ class PembukuanController extends Controller
         $monthlyData = array_filter($monthlyData, function($data) {
             return $data['penjualan'] > 0 || $data['pengeluaran'] > 0;
         });
+
+        // Filter based on search query if present
+        if (request('search')) {
+            $search = strtolower(request('search'));
+            $monthlyData = array_filter($monthlyData, function($data) use ($search) {
+                return str_contains(strtolower($data['month_name']), $search);
+            });
+        }
         
         // Re-index array after filtering
         $monthlyData = array_values($monthlyData);
@@ -98,5 +111,79 @@ class PembukuanController extends Controller
             'latestMonthPenjualan',
             'latestMonthPengeluaran'
         ));
+    }
+
+    public function exportPDF()
+    {
+        $currentYear = now()->year;
+        
+        // Get monthly breakdown
+        $monthlyData = [];
+        for ($month = 1; $month <= 12; $month++) {
+            $penjualan = Penjualan::whereYear('tanggal', $currentYear)
+                                  ->whereMonth('tanggal', $month)
+                                  ->sum('total');
+            
+            $pengeluaran = Pengeluaran::whereYear('tanggal', $currentYear)
+                                      ->whereMonth('tanggal', $month)
+                                      ->sum('total');
+            
+            $saldo = $penjualan - $pengeluaran;
+            
+            $monthlyData[] = [
+                'month' => $month,
+                'month_name' => \Carbon\Carbon::create()->month($month)->locale('id')->translatedFormat('F'),
+                'penjualan' => $penjualan,
+                'pengeluaran' => $pengeluaran,
+                'saldo' => $saldo,
+            ];
+        }
+        
+        // Filter only months with data
+        $monthlyData = array_filter($monthlyData, function($data) {
+            return $data['penjualan'] > 0 || $data['pengeluaran'] > 0;
+        });
+        
+        $monthlyData = array_values($monthlyData);
+        
+        $pdf = PDF::loadView('pages.pembukuan.pdf', compact('monthlyData', 'currentYear'));
+        
+        return $pdf->download('pembukuan_' . $currentYear . '.pdf');
+    }
+
+    public function exportExcel()
+    {
+        $currentYear = now()->year;
+        
+        // Get monthly breakdown
+        $monthlyData = [];
+        for ($month = 1; $month <= 12; $month++) {
+            $penjualan = Penjualan::whereYear('tanggal', $currentYear)
+                                  ->whereMonth('tanggal', $month)
+                                  ->sum('total');
+            
+            $pengeluaran = Pengeluaran::whereYear('tanggal', $currentYear)
+                                      ->whereMonth('tanggal', $month)
+                                      ->sum('total');
+            
+            $saldo = $penjualan - $pengeluaran;
+            
+            $monthlyData[] = [
+                'month' => $month,
+                'month_name' => \Carbon\Carbon::create()->month($month)->locale('id')->translatedFormat('F'),
+                'penjualan' => $penjualan,
+                'pengeluaran' => $pengeluaran,
+                'saldo' => $saldo,
+            ];
+        }
+        
+        // Filter only months with data
+        $monthlyData = array_filter($monthlyData, function($data) {
+            return $data['penjualan'] > 0 || $data['pengeluaran'] > 0;
+        });
+        
+        $monthlyData = array_values($monthlyData);
+
+        return Excel::download(new PembukuanExport($monthlyData), 'pembukuan_' . $currentYear . '.xlsx');
     }
 }
